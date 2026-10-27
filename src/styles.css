@@ -1,0 +1,123 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.155 0.004 260);
+  --foreground: oklch(0.95 0.004 260);
+  --card: oklch(0.19 0.005 260);
+  --card-foreground: oklch(0.95 0.004 260);
+  --surface: oklch(0.185 0.005 260);
+  --surface-2: oklch(0.225 0.006 260);
+  --popover: oklch(0.19 0.005 260);
+  --popover-foreground: oklch(0.95 0.004 260);
+  --primary: oklch(0.8 0.12 220);
+  --primary-foreground: oklch(0.16 0.02 240);
+  --secondary: oklch(0.235 0.006 260);
+  --secondary-foreground: oklch(0.95 0.004 260);
+  --muted: oklch(0.22 0.005 260);
+  --muted-foreground: oklch(0.7 0.01 260);
+  --accent: oklch(0.8 0.12 220);
+  --accent-foreground: oklch(0.16 0.02 240);
+  --destructive: oklch(0.65 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(1 0 0 / 9%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.8 0.12 220);
+  --shadow-panel: 0 30px 60px -30px oklch(0 0 0 / 70%), 0 0 0 1px oklch(1 0 0 / 6%);
+  --glow-soft: radial-gradient(600px circle at 70% 30%, oklch(0.8 0.12 220 / 8%), transparent 60%);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.03em; }
+  ::selection { background: oklch(0.8 0.12 220 / 30%); }
+  :focus-visible { outline: 2px solid var(--color-ring); outline-offset: 3px; border-radius: 6px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@utility container-x {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (min-width: 768px) { padding-inline: 2rem; }
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
+@utility grid-bg {
+  background-image:
+    linear-gradient(oklch(1 0 0 / 3.5%) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 3.5%) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 60% 30%, black 20%, transparent 70%);
+}
+
+@utility glow-soft { background-image: var(--glow-soft); }
+@utility shadow-panel { box-shadow: var(--shadow-panel); }
+
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s ease;
+  &:hover { background-size: 100% 1px; }
+}
+
+@utility card-hover {
+  transition: border-color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+  &:hover { border-color: oklch(0.8 0.12 220 / 35%); transform: translateY(-3px); }
+}
